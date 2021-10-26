@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acolin <acolin@student.42.fr>              +#+  +:+       +#+         #
+#    By: andrew <andrew@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 10:33:42 by acolin            #+#    #+#              #
-#    Updated: 2021/10/25 16:02:28 by acolin           ###   ########.fr        #
+#    Updated: 2021/10/26 19:09:02 by andrew           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME_SERVER = server
 LIB = libftprintf/libftprintf.a
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
-RM = rf -f
+RM = rm -f
 
 SRCS_CLIENT = ft_client.c
 SRCS_SERVER = ft_server.c
@@ -25,8 +25,8 @@ SRCS = ft_putchar_fd.c ft_putstr_fd.c \
 OBJC = ${SRCS=.c:.o}
 
 all: 
-	${CC} ${CFlAG} ${SRCS_SERVER} ${SRCS} -o ${NAME_SERVER}
-	${CC} ${CFlAG} ${SRCS_CLIENT} ${SRCS} -o ${NAME_CLIENT}
+	${CC} ${CFlAGS} ${SRCS_SERVER} ${SRCS} -o ${NAME_SERVER}
+	${CC} ${CFlAGS} ${SRCS_CLIENT} ${SRCS} -o ${NAME_CLIENT}
 
 clean:
 	 ${RM} ${OBJC}

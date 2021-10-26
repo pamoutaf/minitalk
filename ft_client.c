@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_client.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:39:58 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/26 17:37:03 by acolin           ###   ########.fr       */
+/*   Updated: 2021/10/26 20:16:45 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void ft_cmpt(int s)
+void	ft_cmpt(int s)
 {
-	printf("%i ok\n", s);
 }
 
 void	int_dec(unsigned char c, int pid)
@@ -30,12 +29,14 @@ void	int_dec(unsigned char c, int pid)
 			kill(pid, SIGUSR1);
 		i--;
 		pause();
+		usleep(200);
 	}
 }
 
 int	main(int argc, char *argv[])
 {
 	int i;
+	int	size;
 	int pid;
 	
 	signal(SIGUSR1, ft_cmpt);
@@ -43,6 +44,7 @@ int	main(int argc, char *argv[])
 	if (argc > 1 && argc < 4)
 	{
 		i = 0;
+		size = 0;
 		pid = ft_atoi(argv[1]);
 		if (pid != 0)
 		{
@@ -50,7 +52,13 @@ int	main(int argc, char *argv[])
 			{
 				int_dec((unsigned char) argv[2][i], pid);
 				i++;
+				size += 8;
 			}
+			int_dec((unsigned char) '\0', pid);
+			size += 8;
+			ft_putstr_fd("envoyer : ", 1);
+			ft_putnbr_fd(size, 1);
+			ft_putstr_fd(" bytes\n", 1);
 		}
 	}
 	return (1);
