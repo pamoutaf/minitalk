@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 11:54:10 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/25 16:01:08 by acolin           ###   ########.fr       */
+/*   Created: 2021/10/07 11:54:10 by pamoutaf          #+#    #+#             */
+/*   Updated: 2021/10/28 18:55:18 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minitalk.h"
 
-/**
- * Écrit l’integer ’n’ sur le file descriptor donné.
- *
- * \param	n	La chaine de caractères à écrire.
- * \param	fd	Le file descriptor sur lequel écrire.
- * \return		None
- */
 void	ft_putnbr_fd(int n, int fd)
 {
 	long	nbr;

@@ -3,47 +3,41 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acolin <acolin@student.42.fr>              +#+  +:+       +#+         #
+#    By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/10/19 10:33:42 by acolin            #+#    #+#              #
-#    Updated: 2021/10/28 12:19:35 by acolin           ###   ########.fr        #
+#    Created: 2021/10/19 10:33:42 by pamoutaf          #+#    #+#              #
+#    Updated: 2021/10/28 18:55:18 by pamoutaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_CLIENT = client
-NAME_SERVER = server
-LIB = libftprintf/libftprintf.a
-CFLAGS = -Wall -Wextra -Werror
-CC = gcc
-RM = rm -f
-
-SRCS_CLIENT = ft_client.c
-SRCS_SERVER = ft_server.c
+CLIENT = client
+SERVER = server
+SRC0 = ft_client.c
+SRC1 = ft_server.c
 SRCS = ft_putchar_fd.c ft_putstr_fd.c \
 		ft_atoi.c ft_putnbr_fd.c
+GCC = gcc -Wall -Wextra -Werror -fsanitize=address
+OBJS_CLT = $(SRC0:.c=.o)
+OBJS_SRV = $(SRC1:.c=.o)
+OBJS_SRCS = $(SRCS:.c=.o)
+RM = rm -rf
 
-OBJC = ${SRCS:.c=.o}
-OBJC_C = ${SRCS_CLIENT:.c=.o}
-OBJC_S = ${SRCS_SERVER:.c=.o}
+all: $(SERVER) $(CLIENT)
 
-.c.o:
-	${CC} ${CFLAGS} -c ${SRCS} -o ${<:.c=.o}
+$(NAME):	all
 
-all: client server
-	
-client:
-	${CC} ${CFLAGS} ${OBJC_C} ${OBJC} -o ${NAME_CLIENT}
-server:
-	${CC} ${CFLAGS} ${OBJC_S} ${OBJC} -o ${NAME_SERVER}
-	
-clean:
-	 ${RM} ${OBJC} ${OBJC_C} ${OBJC_S}
+$(SERVER):
+		$(GCC) -c $(SRC1) $(SRCS)
+		$(GCC) -o $(SERVER) $(OBJS_SRV) $(OBJS_SRCS)
+
+$(CLIENT):
+		$(GCC) -c $(SRC0) $(SRCS)
+		$(GCC) -o $(CLIENT) $(OBJS_CLT) $(OBJS_SRCS)
+
+clean:  
+		$(RM) $(OBJS_SRV) $(OBJS_CLT) $(OBJS_SRCS)
 
 fclean: clean
-	${RM} ${NAME_CLIENT} ${NAME_SERVER}
-
-bonus:
+		$(RM) $(SERVER) $(CLIENT)
 
 re: fclean all
-
-.PHONY: all clean fclean re

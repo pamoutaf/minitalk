@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 12:52:04 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/25 16:07:46 by acolin           ###   ########.fr       */
+/*   Created: 2021/10/07 12:52:04 by pamoutaf          #+#    #+#             */
+/*   Updated: 2021/10/28 18:55:18 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "minitalk.h"
 
 static int	ft_overflow(int neg)
 {
@@ -19,36 +19,30 @@ static int	ft_overflow(int neg)
 	return (-1);
 }
 
-/**
- * convertit le début de la chaîne pointée par nptr en entier de type int .
- *
- * \param	nptr	chaine à convertir
- * \return			Le résultat de la conversion.
- */
-int	ft_atoi(const char *nptr)
+int	ft_atoi(const char *str)
 {	
 	int		neg;
 	long	num;
 
 	num = 0;
 	neg = 1;
-	while (*nptr == ' ' || *nptr == '\n'
-		|| *nptr == '\t' || *nptr == '\r'
-		|| *nptr == '\v' || *nptr == '\f')
-		nptr++;
-	if (*nptr == '-' || *nptr == '+')
+	while (*str == ' ' || *str == '\n'
+		|| *str == '\t' || *str == '\r'
+		|| *str == '\v' || *str == '\f')
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if (*nptr == '-')
+		if (*str == '-')
 			neg = -1;
-		nptr++;
+		str++;
 	}
-	while (*nptr >= '0' && *nptr <= '9')
+	while (*str >= '0' && *str <= '9')
 	{
-		if ((num * 10 + (*nptr - '0')) / 10 != num)
+		if ((num * 10 + (*str - '0')) / 10 != num)
 			return (ft_overflow(neg));
 		num *= 10;
-		num += *nptr - '0';
-		nptr++;
+		num += *str - '0';
+		str++;
 	}
 	return (num * neg);
 }

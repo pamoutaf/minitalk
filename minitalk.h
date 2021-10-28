@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/25 10:38:59 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/28 09:56:33 by acolin           ###   ########.fr       */
+/*   Created: 2021/10/25 10:38:59 by pamoutaf          #+#    #+#             */
+/*   Updated: 2021/10/28 18:55:18 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef MINITALK_H
+# define MINITALK_H
 
 # include <unistd.h>
 # include <stdlib.h>
