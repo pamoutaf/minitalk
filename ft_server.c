@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_server.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:40:14 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/27 19:46:31 by andrew           ###   ########.fr       */
+/*   Updated: 2021/10/28 10:31:12 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,23 @@ void	ft_aff_pid(void)
 	ft_putchar_fd('\n', 1);
 }
 
-void	ft_aff_char(unsigned char *c, int *size)
-{
-	if (*c == '\0')
-	{
-		ft_putstr_fd("\nreçu : ", 1);
-		ft_putnbr_fd(*size, 1);
-		ft_putstr_fd(" bytes\n", 1);
-		*size = 0;
-	}
-	else
-		ft_putchar_fd(*c, 1);
-}
-
 void	on_signal(int s, siginfo_t *sigt, void *v)
 {
 	static unsigned char	c = 0;
 	static int				i = 0;
-	static int				size = 0;
 
+	(void)v;
 	c |= s == SIGUSR2;
 	i++;
-	size++;
 	if (i < 8)
 		c <<= 1;
 	if (i == 8)
 	{
-		ft_aff_char(&c, &size);
+		ft_putchar_fd(c, 1);
 		i = 0;
 		c = 0;
 	}
+	usleep(200);
 	kill(sigt->si_pid, SIGUSR1);
 }
 

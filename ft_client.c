@@ -3,26 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_client.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acolin <acolin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:39:58 by acolin            #+#    #+#             */
-/*   Updated: 2021/10/27 19:44:40 by andrew           ###   ########.fr       */
+/*   Updated: 2021/10/28 12:17:12 by acolin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	ft_aff_nbbytes(int size)
-{
-	ft_putstr_fd("envoyer : ", 1);
-	ft_putnbr_fd(size, 1);
-	ft_putstr_fd(" bytes\n", 1);
-}
-
-void	ft_cmpt(int s)
+void	ft_exit(int s)
 {
 	if (s == SIGUSR2)
-		exit();
+		exit(1);
+}
+
+int	ft_verif_pid(int pid)
+{
+	int	i;
+
+	if (pid <= 0)
+		return (0);
+	i = 8;
+	while (i-- && kill(pid, SIGUSR1) == 0)
+	{
+		pause();
+		usleep(200);
+	}
+	if (i == -1)
+		return (1);
+	return (0);
 }
 
 void	int_dec(unsigned char c, int pid)
@@ -37,35 +47,34 @@ void	int_dec(unsigned char c, int pid)
 		else
 			kill(pid, SIGUSR1);
 		i--;
-		usleep(600);
+		pause();
+		usleep(200);
 	}
 }
 
 int	main(int argc, char *argv[])
 {
 	int	i;
-	int	size;
 	int	pid;
 
-	signal(SIGUSR1, ft_cmpt);
-	signal(SIGUSR2, ft_cmpt);
+	signal(SIGUSR1, ft_exit);
+	signal(SIGUSR2, ft_exit);
 	if (argc > 1 && argc < 4)
 	{
 		i = 0;
-		size = 0;
 		pid = ft_atoi(argv[1]);
-		if (pid != 0)
+		if (ft_verif_pid(pid))
 		{
 			while (argv[2][i] != '\0')
 			{
 				int_dec((unsigned char) argv[2][i], pid);
 				i++;
-				size += 8;
 			}
-			int_dec((unsigned char) '\0', pid);
-			size += 8;
-			ft_aff_nbbytes(size);
 		}
+		else
+			ft_putstr_fd("Invalid PID\n", 1);
 	}
+	else
+		ft_putstr_fd("usage : ./client <pid> <message>\n", 1);
 	return (1);
 }
