@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/25 10:39:58 by pamoutaf          #+#    #+#             */
-/*   Updated: 2021/10/28 18:55:18 by pamoutaf         ###   ########.fr       */
+/*   Created: 2021/10/30 14:12:55 by pamoutaf          #+#    #+#             */
+/*   Updated: 2021/10/30 17:16:34 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+#include <stdio.h>
 
 void	ft_exit(int s)
 {
@@ -18,7 +19,7 @@ void	ft_exit(int s)
 		exit(1);
 }
 
-int	ft_verif_pid(int pid)
+int	ft_isPid(int pid)
 {
 	int	i;
 
@@ -35,20 +36,24 @@ int	ft_verif_pid(int pid)
 	return (0);
 }
 
-void	int_dec(unsigned char c, int pid)
+static void	ft_bit(unsigned char c, int pid)
 {
 	int	i;
-
-	i = 8;
-	while (i)
+	int	shift;
+	i = 0;
+	shift = -1;
+	while (i < 8)
 	{
-		if ((c >> (i - 1)) & 1)
-			kill(pid, SIGUSR2);
+		while (++shift < 8)
+		{	
+			if ((c & 1) >> shift)
+			kill(pid, SIGUSR2); // if bit is 1
 		else
-			kill(pid, SIGUSR1);
-		i--;
+			kill(pid, SIGUSR1); // if bit is 0
 		pause();
 		usleep(200);
+		}
+		i++;
 	}
 }
 
@@ -63,11 +68,11 @@ int	main(int argc, char *argv[])
 	{
 		i = 0;
 		pid = ft_atoi(argv[1]);
-		if (ft_verif_pid(pid))
+		if (ft_isPid(pid))
 		{
 			while (argv[2][i] != '\0')
 			{
-				int_dec((unsigned char) argv[2][i], pid);
+				ft_bit((unsigned char) argv[2][i], pid);
 				i++;
 			}
 		}
