@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_server.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamoutaf <pamoutaf@student.s19.be>         +#+  +:+       +#+        */
+/*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 14:13:02 by pamoutaf          #+#    #+#             */
-/*   Updated: 2021/11/01 13:22:45 by pamoutaf         ###   ########.fr       */
+/*   Updated: 2021/11/01 18:23:59 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,18 @@ void	ft_getpid(void)
 
 void	ft_what(int num, siginfo_t *info, void *empty)
 {
-	static char	c;
-	static int	i;
+	static char	c = 0;
+	static int	shift = 0;
 
 	(void)empty;
-	c = 0;
-	i = 0;
+	(void)info;
 	if (num == SIGUSR1)
-		c += 1 << (7 - i);
-	i++;
-	if (i == 8)
+		c = c | (1 << (7 - shift));
+	shift++;
+	if (shift == 8)
 	{
 		ft_putchar_fd(c, 1);
-		i = 0;
+		shift = 0;
 		c = 0;
 	}
 	kill(info->si_pid, SIGUSR1);
@@ -54,5 +53,6 @@ int	main(int argc, char **argv)
 		while (1)
 			pause();
 	}
+	ft_putstr_fd("usage : ./server <no argument!>\n", 1);
 	return (0);
 }
