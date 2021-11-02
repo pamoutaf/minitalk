@@ -6,7 +6,7 @@
 /*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 14:13:26 by pamoutaf          #+#    #+#             */
-/*   Updated: 2021/11/02 11:56:05 by pamoutaf         ###   ########.fr       */
+/*   Updated: 2021/11/02 13:26:43 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
-# include <sys/types.h>
 
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
