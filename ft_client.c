@@ -6,13 +6,11 @@
 /*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 14:12:55 by pamoutaf          #+#    #+#             */
-/*   Updated: 2021/11/02 13:23:39 by pamoutaf         ###   ########.fr       */
+/*   Updated: 2021/11/02 13:25:43 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdio.h>
-#include <stdint.h>
 
 static int	g_lock;
 
