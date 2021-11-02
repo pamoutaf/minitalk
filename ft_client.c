@@ -6,7 +6,7 @@
 /*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 14:12:55 by pamoutaf          #+#    #+#             */
-/*   Updated: 2021/11/02 10:52:33 by pamoutaf         ###   ########.fr       */
+/*   Updated: 2021/11/02 12:19:11 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_sendchar(unsigned char c, int pid)
 		while (g_lock == 0)
 		{
 		}
+		usleep(5);
 		i--;
 	}
 	return (1);
@@ -48,14 +49,14 @@ void	received(int i)
 	g_lock = 1;
 }
 
-void	send_str(char *str_pid, char *message)
+void	send_str(char *strpid, char *message)
 {
 	int			pid;
-
-	pid = ft_atoi(str_pid);
+	
+	pid = ft_atoi(strpid);
 	if (pid <= 0)
-		write(1, "Invalid PID\n", 13);
-	while (*message)
+		write(2, "Invalid PID\n", 13);
+	while (*message) 
 	{
 		ft_sendchar(*message, pid);
 		++message;
@@ -66,8 +67,14 @@ void	send_str(char *str_pid, char *message)
 int		main(int argc, char **argv)
 {
 	if (argc != 3)
-		ft_putstr_fd("usage : ./client <pid> <message>\n", 1);
+	{
+		ft_putstr_fd("usage : ./client <pid> <message>\n", 2);
+		return (0);
+	}
+	if (ft_atoi(argv[1]) <= 0)
+		return (0);
 	signal(SIGUSR1, received);
 	send_str(argv[1], argv[2]);
+	ft_putstr_fd("Message Received Successfully\n", 1);
 	return (0);
 }

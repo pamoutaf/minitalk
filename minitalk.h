@@ -6,7 +6,7 @@
 /*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 14:13:26 by pamoutaf          #+#    #+#             */
-/*   Updated: 2021/10/30 14:13:28 by pamoutaf         ###   ########.fr       */
+/*   Updated: 2021/11/02 11:56:05 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	ft_putchar_fd(char c, int fd);
 int		ft_atoi(const char *nptr);
 void	ft_putnbr_fd(int n, int fd);
 char	*ft_itoa(int n);
+int		ft_strlen(char *str);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamoutaf <pamoutaf@student.s19.be>         +#+  +:+       +#+        */
+/*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 14:10:50 by pamoutaf          #+#    #+#             */
-/*   Updated: 2021/11/01 13:23:35 by pamoutaf         ###   ########.fr       */
+/*   Updated: 2021/11/02 11:55:35 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ void	ft_putnbr_fd(int n, int fd)
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
+	
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+	
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
 int	ft_atoi(const char *str)
