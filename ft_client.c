@@ -6,7 +6,7 @@
 /*   By: pamoutaf <pamoutaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 14:12:55 by pamoutaf          #+#    #+#             */
-/*   Updated: 2021/11/02 12:19:11 by pamoutaf         ###   ########.fr       */
+/*   Updated: 2021/11/02 13:23:39 by pamoutaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-static int g_lock;
+static int	g_lock;
 
 int	ft_sendchar(unsigned char c, int pid)
 {
@@ -52,11 +52,11 @@ void	received(int i)
 void	send_str(char *strpid, char *message)
 {
 	int			pid;
-	
+
 	pid = ft_atoi(strpid);
 	if (pid <= 0)
 		write(2, "Invalid PID\n", 13);
-	while (*message) 
+	while (*message)
 	{
 		ft_sendchar(*message, pid);
 		++message;
@@ -64,7 +64,7 @@ void	send_str(char *strpid, char *message)
 	ft_sendchar(*message, pid);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc != 3)
 	{
