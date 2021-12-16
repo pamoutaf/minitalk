@@ -22,7 +22,6 @@ OBJS_SRCS = $(SRCS:.c=.o)
 RM = rm -rf
 
 
-
 $(NAME): all
 
 all: $(SERVER) $(CLIENT)
